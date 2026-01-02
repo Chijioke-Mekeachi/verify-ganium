@@ -161,23 +161,60 @@ export default function HomePage() {
             
             {/* App Preview */}
             <div className="relative">
-              <div className="relative">
-                {/* Phone Mockup */}
-                <div className="relative mx-auto w-80 h-[600px] bg-gradient-to-br from-blue-900 to-blue-950 rounded-[3rem] p-6 shadow-2xl">
-                  {/* Phone Notch */}
-                  <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-40 h-6 bg-blue-900 rounded-b-2xl"></div>
-                  
-                  {/* Screen Content */}
-                  <div className="h-full bg-gradient-to-b from-white to-blue-50 rounded-[2.5rem] overflow-hidden">
-                    <Image alt='app preview' src={'/preview.png'} width={500} height={100}/>
-                  </div>
-                </div>
-                
-                {/* Floating Elements */}
-                <div className="absolute -top-6 -right-6 w-24 h-24 bg-blue-100 rounded-2xl -z-10 animate-float"></div>
-                <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-blue-200/50 rounded-2xl -z-10 animate-float" style={{ animationDelay: '1s' }}></div>
+  <div className="relative mx-auto w-80 h-[600px]">
+    {/* Phone Frame with Metallic Edge */}
+    <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-[3rem] p-[3px] shadow-2xl">
+      {/* Metallic Frame */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-800 rounded-[2.9rem] p-[10px]">
+        {/* Main Phone Body */}
+        <div className="relative w-full h-full bg-gradient-to-br from-gray-900 to-black rounded-[2.5rem] overflow-hidden">
+          {/* Screen Bezel */}
+          <div className="absolute inset-[6px] bg-gradient-to-b from-gray-950 to-black rounded-[2.4rem] overflow-hidden">
+            {/* Dynamic Island */}
+            <div className="absolute top-3 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-full z-20 shadow-lg">
+              <div className="absolute inset-0 flex items-center justify-center space-x-1">
+                <div className="w-2 h-2 bg-gray-700 rounded-full"></div>
+                <div className="w-8 h-3 bg-gray-900 rounded-full"></div>
               </div>
             </div>
+            
+            {/* Screen Content */}
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-50 to-white rounded-[2.4rem] overflow-hidden">
+              <div className="relative w-full h-full">
+                <Image 
+                  alt='app preview' 
+                  src={'/preview.png'} 
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                {/* Screen Reflection Effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-white/5 pointer-events-none"></div>
+              </div>
+            </div>
+            
+            {/* Camera Cutout */}
+            <div className="absolute top-4 left-1/2 transform -translate-x-1/2 w-10 h-4 bg-black rounded-b-lg z-10"></div>
+          </div>
+          
+          {/* Side Buttons */}
+          <div className="absolute -right-1 top-32 w-2 h-12 bg-gradient-to-r from-gray-800 to-gray-900 rounded-r-md shadow-lg"></div>
+          <div className="absolute -right-1 top-48 w-2 h-8 bg-gradient-to-r from-gray-800 to-gray-900 rounded-r-md shadow-lg"></div>
+          <div className="absolute -left-1 top-40 w-2 h-20 bg-gradient-to-l from-gray-800 to-gray-900 rounded-l-md shadow-lg"></div>
+          
+          {/* Bottom Speaker Grill */}
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-transparent via-gray-800 to-transparent rounded-full"></div>
+        </div>
+      </div>
+    </div>
+    
+    {/* Subtle Glow Effect */}
+    <div className="absolute -inset-4 bg-gradient-to-br from-blue-500/20 to-purple-500/10 rounded-[3.5rem] blur-xl -z-10"></div>
+  </div>
+  
+  {/* Realistic Shadows and Highlights */}
+  <div className="absolute -inset-2 bg-gradient-to-br from-blue-200/10 via-transparent to-purple-200/10 rounded-[3.2rem] blur-lg"></div>
+</div>
           </div>
         </div>
       </section>
