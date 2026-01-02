@@ -6,8 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { supabase } from '@/lib/supabase/client';
-import { FiLock, FiEye, FiEyeOff, FiCheck, FiAlertCircle, FiShield, FiLoader } from 'react-icons/fi';
-import { MdSecurity } from 'react-icons/md';
+import { FiLock, FiEye, FiEyeOff, FiCheck, FiAlertCircle, FiShield, FiLoader, FiArrowLeft } from 'react-icons/fi';
 
 // Password validation schema
 const passwordSchema = z.object({
@@ -36,7 +35,6 @@ function ResetPasswordContent() {
   // Get token from URL
   const accessToken = searchParams.get('access_token');
 
-  // Initialize react-hook-form
   const {
     register,
     handleSubmit,
@@ -65,7 +63,6 @@ function ResetPasswordContent() {
     setPasswordStrength(Math.min(strength, 5));
   }, [password]);
 
-  // Check for valid token on mount
   useEffect(() => {
     if (!accessToken) {
       setError('Invalid or missing reset token. Please request a new password reset link.');
@@ -86,13 +83,10 @@ function ResetPasswordContent() {
         password: data.password,
       });
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
       setSuccess(true);
       
-      // Redirect to login page after 3 seconds
       setTimeout(() => {
         router.push('/login');
       }, 3000);
@@ -100,7 +94,6 @@ function ResetPasswordContent() {
     } catch (err: any) {
       console.error('Password reset error:', err);
       
-      // Handle specific error cases
       if (err.message.includes('invalid')) {
         setError('Invalid or expired reset token. Please request a new password reset link.');
       } else if (err.message.includes('weak')) {
@@ -113,7 +106,6 @@ function ResetPasswordContent() {
     }
   };
 
-  // Get password strength color and label
   const getStrengthInfo = () => {
     const colors = ['bg-red-500', 'bg-red-400', 'bg-yellow-500', 'bg-yellow-400', 'bg-green-500', 'bg-green-600'];
     const labels = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong', 'Very Strong'];
@@ -128,7 +120,7 @@ function ResetPasswordContent() {
 
   if (!accessToken) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center">
             <div className="mx-auto w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6">
@@ -140,7 +132,7 @@ function ResetPasswordContent() {
             </p>
             <button
               onClick={() => router.push('/forgot-password')}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium py-3 px-4 rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300"
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-medium py-3 px-4 rounded-xl hover:from-blue-700 hover:to-blue-900 transition-all duration-300"
             >
               Request New Reset Link
             </button>
@@ -151,12 +143,11 @@ function ResetPasswordContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
       <div className="max-w-md w-full">
-        {/* Header */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-3xl shadow-lg mb-6">
-            <MdSecurity className="w-10 h-10 text-white" />
+          <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl shadow-lg mb-6">
+            <FiShield className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-3xl font-bold text-gray-900 mb-3">Set New Password</h1>
           <p className="text-gray-600">
@@ -164,9 +155,7 @@ function ResetPasswordContent() {
           </p>
         </div>
 
-        {/* Form Card */}
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          {/* Success Message */}
           {success && (
             <div className="bg-gradient-to-r from-green-50 to-emerald-50 p-6 border-b border-green-100">
               <div className="flex items-center space-x-3">
@@ -183,7 +172,6 @@ function ResetPasswordContent() {
             </div>
           )}
 
-          {/* Error Message */}
           {error && !success && (
             <div className="bg-gradient-to-r from-red-50 to-rose-50 p-6 border-b border-red-100">
               <div className="flex items-center space-x-3">
@@ -198,19 +186,17 @@ function ResetPasswordContent() {
             </div>
           )}
 
-          {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="p-8">
-            {/* New Password */}
             <div className="mb-6">
               <label className="flex items-center text-sm font-medium text-gray-700 mb-3">
-                <FiLock className="w-4 h-4 mr-2 text-green-600" />
+                <FiLock className="w-4 h-4 mr-2 text-blue-600" />
                 New Password
               </label>
               <div className="relative">
                 <input
                   {...register('password')}
                   type={showPassword ? 'text' : 'password'}
-                  className="w-full px-4 py-3 pl-11 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 pl-11 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   placeholder="Enter new password"
                   disabled={success || loading}
                 />
@@ -227,7 +213,6 @@ function ResetPasswordContent() {
                 <p className="mt-2 text-sm text-red-600">{errors.password.message}</p>
               )}
 
-              {/* Password Strength Indicator */}
               {password && (
                 <div className="mt-4">
                   <div className="flex justify-between items-center mb-2">
@@ -246,17 +231,16 @@ function ResetPasswordContent() {
               )}
             </div>
 
-            {/* Confirm Password */}
             <div className="mb-8">
               <label className="flex items-center text-sm font-medium text-gray-700 mb-3">
-                <FiLock className="w-4 h-4 mr-2 text-green-600" />
+                <FiLock className="w-4 h-4 mr-2 text-blue-600" />
                 Confirm New Password
               </label>
               <div className="relative">
                 <input
                   {...register('confirmPassword')}
                   type={showConfirmPassword ? 'text' : 'password'}
-                  className="w-full px-4 py-3 pl-11 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 pl-11 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   placeholder="Confirm new password"
                   disabled={success || loading}
                 />
@@ -274,10 +258,9 @@ function ResetPasswordContent() {
               )}
             </div>
 
-            {/* Password Requirements */}
             <div className="bg-gray-50 rounded-xl p-5 mb-8">
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center">
-                <FiShield className="w-4 h-4 mr-2 text-green-600" />
+                <FiShield className="w-4 h-4 mr-2 text-blue-600" />
                 Password Requirements:
               </h3>
               <ul className="space-y-2">
@@ -308,11 +291,10 @@ function ResetPasswordContent() {
               </ul>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading || success}
-              className="w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-medium py-4 px-6 rounded-xl hover:from-green-700 hover:to-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-green-200"
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-medium py-4 px-6 rounded-xl hover:from-blue-700 hover:to-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-blue-200"
             >
               {loading ? (
                 <span className="flex items-center justify-center">
@@ -332,25 +314,24 @@ function ResetPasswordContent() {
               )}
             </button>
 
-            {/* Security Note */}
-            <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-100">
+            <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl border border-blue-200">
               <div className="flex items-start space-x-3">
                 <FiShield className="w-5 h-5 text-blue-600 mt-0.5" />
                 <p className="text-sm text-blue-700">
-                  <span className="font-semibold">Secure connection:</span> All passwords are encrypted with AES-256 encryption for maximum security.
+                  <span className="font-semibold">Secure connection:</span> All passwords are encrypted with AES-256 encryption.
                 </p>
               </div>
             </div>
           </form>
         </div>
 
-        {/* Back to Login */}
         <div className="text-center mt-8">
           <button
-            onClick={() => router.push('/login')}
-            className="text-sm text-gray-600 hover:text-gray-900 font-medium transition-colors"
+            onClick={() => router.push('/')}
+            className="text-sm text-gray-600 hover:text-blue-600 font-medium transition-colors flex items-center justify-center mx-auto"
           >
-            ← Back to Login
+            <FiArrowLeft className="w-4 h-4 mr-2" />
+            Back to Home
           </button>
         </div>
       </div>
@@ -361,11 +342,11 @@ function ResetPasswordContent() {
 export default function ResetPasswordPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center">
-            <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-6">
-              <FiLoader className="w-8 h-8 text-gray-600 animate-spin" />
+            <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+              <FiLoader className="w-8 h-8 text-blue-600 animate-spin" />
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-4">Loading...</h1>
             <p className="text-gray-600">

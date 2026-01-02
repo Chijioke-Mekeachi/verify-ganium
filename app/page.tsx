@@ -15,6 +15,7 @@ import {
 } from 'react-icons/md';
 import { FaApple, FaGooglePlay } from 'react-icons/fa';
 import { SiAppstore, SiGoogleplay } from 'react-icons/si';
+import Image from 'next/image';
 
 export default function HomePage() {
   const [scansCount, setScansCount] = useState(0);
@@ -168,84 +169,7 @@ export default function HomePage() {
                   
                   {/* Screen Content */}
                   <div className="h-full bg-gradient-to-b from-white to-blue-50 rounded-[2.5rem] overflow-hidden">
-                    {/* App Header */}
-                    <div className="bg-gradient-to-r from-blue-600 to-blue-800 p-6">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <MdSecurityUpdateGood className="w-6 h-6 text-white" />
-                          <span className="text-white font-bold text-lg">ScamGuard Pro</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                          <span className="text-white/80 text-xs">Active</span>
-                        </div>
-                      </div>
-                      <div className="mt-4">
-                        <h3 className="text-white font-bold text-xl">Active Protection</h3>
-                        <p className="text-white/80 text-sm">Scanning for threats in real-time</p>
-                      </div>
-                    </div>
-                    
-                    {/* Stats */}
-                    <div className="p-6">
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                          <div className="text-2xl font-bold text-blue-700">24/7</div>
-                          <div className="text-sm text-gray-600">Protection</div>
-                        </div>
-                        <div className="bg-blue-50 rounded-xl p-4 border border-blue-100">
-                          <div className="text-2xl font-bold text-blue-700">99.7%</div>
-                          <div className="text-sm text-gray-600">Accuracy</div>
-                        </div>
-                      </div>
-                      
-                      {/* Recent Detections */}
-                      <div className="space-y-3">
-                        <div className="text-sm font-medium text-gray-700 mb-2">Recent Scans</div>
-                        
-                        <div className="flex items-center justify-between p-3 bg-green-50 rounded-xl border border-green-100">
-                          <div className="flex items-center space-x-3">
-                            <FiCheckCircle className="w-5 h-5 text-green-600" />
-                            <div>
-                              <p className="font-medium">bankofamerica.com</p>
-                              <p className="text-xs text-gray-600">Safe • Just now</p>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center justify-between p-3 bg-red-50 rounded-xl border border-red-100 animate-pulse">
-                          <div className="flex items-center space-x-3">
-                            <FiAlertTriangle className="w-5 h-5 text-red-600" />
-                            <div>
-                              <p className="font-medium">secure-paypal.net</p>
-                              <p className="text-xs text-gray-600">Phishing Alert</p>
-                            </div>
-                          </div>
-                          <span className="px-2 py-1 bg-red-100 text-red-700 text-xs font-medium rounded-full">
-                            BLOCKED
-                          </span>
-                        </div>
-                        
-                        <div className="flex items-center justify-between p-3 bg-yellow-50 rounded-xl border border-yellow-100">
-                          <div className="flex items-center space-x-3">
-                            <FiBell className="w-5 h-5 text-yellow-600" />
-                            <div>
-                              <p className="font-medium">Suspicious Email</p>
-                              <p className="text-xs text-gray-600">From unknown sender</p>
-                            </div>
-                          </div>
-                          <span className="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-medium rounded-full">
-                            WARNING
-                          </span>
-                        </div>
-                      </div>
-                      
-                      {/* Scan Button */}
-                      <button className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white py-4 rounded-xl font-bold mt-6 flex items-center justify-center shadow-lg hover:shadow-xl transition-shadow">
-                        <FiActivity className="w-5 h-5 mr-2" />
-                        Start Smart Scan
-                      </button>
-                    </div>
+                    <Image alt='app preview' src={'/preview.png'} width={500} height={100}/>
                   </div>
                 </div>
                 
