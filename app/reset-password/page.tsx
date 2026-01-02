@@ -24,7 +24,7 @@ type PasswordFormData = z.infer<typeof passwordSchema>;
 
 function ResetPasswordContent() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [verifying, setVerifying] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -35,7 +35,9 @@ function ResetPasswordContent() {
   const [isValidToken, setIsValidToken] = useState(false);
 
   // Get tokens from URL
-  const token = searchParams.get('token');
+  const searchParams = useSearchParams();
+const token = searchParams.get('token');
+console.log(token)
 
 
   const {
