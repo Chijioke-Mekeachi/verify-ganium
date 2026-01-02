@@ -26,14 +26,17 @@ function ResetPasswordContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
+  const [verifying, setVerifying] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
+  const [isValidToken, setIsValidToken] = useState(false);
 
-  // Get token from URL
-  const accessToken = searchParams.get('access_token');
+  // Get tokens from URL
+  const token = searchParams.get('token');
+
 
   const {
     register,
@@ -63,15 +66,29 @@ function ResetPasswordContent() {
     setPasswordStrength(Math.min(strength, 5));
   }, [password]);
 
+  // Verify token on mount
   useEffect(() => {
-    if (!accessToken) {
-      setError('Invalid or missing reset token. Please request a new password reset link.');
+  const verifyToken = () => {
+    // Get the token from URL
+    const token = searchParams.get('token');
+
+    if (!token) {
+      setError('Invalid or missing reset token.');
+      setIsValidToken(false);
+    } else {
+      setIsValidToken(true);
     }
-  }, [accessToken]);
+
+    setVerifying(false);
+  };
+
+  verifyToken();
+}, [searchParams]);
+
 
   const onSubmit = async (data: PasswordFormData) => {
-    if (!accessToken) {
-      setError('Invalid reset token');
+    if (!isValidToken) {
+      setError('Please use a valid password reset link.');
       return;
     }
 
@@ -79,27 +96,45 @@ function ResetPasswordContent() {
     setError(null);
 
     try {
-      const { error } = await supabase.auth.updateUser({
+      // Update the user's password
+      const { error: updateError } = await supabase.auth.updateUser({
         password: data.password,
       });
 
-      if (error) throw error;
+      if (updateError) {
+        // If update fails, check if we need to refresh session
+        if (updateError.message.includes('JWT expired')) {
+          setError('Reset token has expired. Please request a new password reset link.');
+          return;
+        }
+        throw updateError;
+      }
 
+      // Password updated successfully
       setSuccess(true);
       
+      // Sign out to clear any remaining session
+      await supabase.auth.signOut();
+      
+      // Redirect to home page after 3 seconds
       setTimeout(() => {
-        router.push('/login');
+        router.push('/');
       }, 3000);
 
     } catch (err: any) {
-      console.error('Password reset error:', err);
+      console.error('Password update error:', err);
       
-      if (err.message.includes('invalid')) {
+      // Handle specific error cases
+      if (err.message.includes('Password should be at least 6 characters')) {
+        setError('Password must be at least 6 characters long.');
+      } else if (err.message.includes('invalid')) {
         setError('Invalid or expired reset token. Please request a new password reset link.');
       } else if (err.message.includes('weak')) {
         setError('Password is too weak. Please choose a stronger password.');
+      } else if (err.message.includes('JWT')) {
+        setError('Reset token has expired. Please request a new password reset link.');
       } else {
-        setError(err.message || 'An error occurred. Please try again.');
+        setError(err.message || 'An error occurred while updating your password. Please try again.');
       }
     } finally {
       setLoading(false);
@@ -118,7 +153,27 @@ function ResetPasswordContent() {
 
   const strengthInfo = getStrengthInfo();
 
-  if (!accessToken) {
+  // Show loading while verifying token
+  if (verifying) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
+          <div className="text-center">
+            <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+              <FiLoader className="w-8 h-8 text-blue-600 animate-spin" />
+            </div>
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">Verifying Reset Link</h1>
+            <p className="text-gray-600">
+              Please wait while we verify your password reset link...
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error if token is invalid
+  if (!isValidToken) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-white rounded-2xl shadow-xl p-8">
@@ -128,11 +183,17 @@ function ResetPasswordContent() {
             </div>
             <h1 className="text-2xl font-bold text-gray-900 mb-4">Invalid Reset Link</h1>
             <p className="text-gray-600 mb-6">
-              The password reset link is invalid or has expired. Please request a new password reset email.
+              {error || 'The password reset link is invalid, expired, or has already been used. Please request a new password reset email.'}
             </p>
             <button
+              onClick={() => router.push('/')}
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-medium py-3 px-4 rounded-xl hover:from-blue-700 hover:to-blue-900 transition-all duration-300 mb-4"
+            >
+              Go to Homepage
+            </button>
+            <button
               onClick={() => router.push('/forgot-password')}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-medium py-3 px-4 rounded-xl hover:from-blue-700 hover:to-blue-900 transition-all duration-300"
+              className="w-full border-2 border-blue-600 text-blue-600 font-medium py-3 px-4 rounded-xl hover:bg-blue-50 transition-all duration-300"
             >
               Request New Reset Link
             </button>
@@ -163,9 +224,9 @@ function ResetPasswordContent() {
                   <FiCheck className="w-5 h-5 text-green-600" />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-green-800">Password Updated!</h3>
+                  <h3 className="font-semibold text-green-800">Password Updated Successfully!</h3>
                   <p className="text-sm text-green-600 mt-1">
-                    Your password has been changed successfully. Redirecting to login...
+                    Your password has been changed. Redirecting to homepage...
                   </p>
                 </div>
               </div>
@@ -205,6 +266,7 @@ function ResetPasswordContent() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  disabled={success || loading}
                 >
                   {showPassword ? <FiEyeOff className="w-4 h-4" /> : <FiEye className="w-4 h-4" />}
                 </button>
@@ -249,6 +311,7 @@ function ResetPasswordContent() {
                   type="button"
                   onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                   className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  disabled={success || loading}
                 >
                   {showConfirmPassword ? <FiEyeOff className="w-4 h-4" /> : <FiEye className="w-4 h-4" />}
                 </button>
@@ -258,14 +321,14 @@ function ResetPasswordContent() {
               )}
             </div>
 
-            <div className="bg-gray-50 rounded-xl p-5 mb-8">
+            <div className="bg-blue-50 rounded-xl p-5 mb-8 border border-blue-100">
               <h3 className="text-sm font-semibold text-gray-900 mb-3 flex items-center">
                 <FiShield className="w-4 h-4 mr-2 text-blue-600" />
                 Password Requirements:
               </h3>
               <ul className="space-y-2">
                 <li className="flex items-center text-sm">
-                  <span className={`w-5 h-5 rounded-full flex items-center justify-center mr-3 ${password.length >= 6 ? 'bg-green-100 text-green-600' : 'bg-gray-200 text-gray-400'}`}>
+                  <span className={`w-5 h-5 rounded-full flex items-center justify-center mr-3 ${password.length >= 6 ? 'bg-green-100 text-green-600' : 'bg-blue-200 text-blue-400'}`}>
                     {password.length >= 6 ? <FiCheck className="w-3 h-3" /> : '•'}
                   </span>
                   <span className={password.length >= 6 ? 'text-green-600' : 'text-gray-600'}>
@@ -273,7 +336,7 @@ function ResetPasswordContent() {
                   </span>
                 </li>
                 <li className="flex items-center text-sm">
-                  <span className={`w-5 h-5 rounded-full flex items-center justify-center mr-3 ${/[A-Z]/.test(password) ? 'bg-green-100 text-green-600' : 'bg-gray-200 text-gray-400'}`}>
+                  <span className={`w-5 h-5 rounded-full flex items-center justify-center mr-3 ${/[A-Z]/.test(password) ? 'bg-green-100 text-green-600' : 'bg-blue-200 text-blue-400'}`}>
                     {/[A-Z]/.test(password) ? <FiCheck className="w-3 h-3" /> : '•'}
                   </span>
                   <span className={/[A-Z]/.test(password) ? 'text-green-600' : 'text-gray-600'}>
@@ -281,7 +344,7 @@ function ResetPasswordContent() {
                   </span>
                 </li>
                 <li className="flex items-center text-sm">
-                  <span className={`w-5 h-5 rounded-full flex items-center justify-center mr-3 ${/[0-9]/.test(password) ? 'bg-green-100 text-green-600' : 'bg-gray-200 text-gray-400'}`}>
+                  <span className={`w-5 h-5 rounded-full flex items-center justify-center mr-3 ${/[0-9]/.test(password) ? 'bg-green-100 text-green-600' : 'bg-blue-200 text-blue-400'}`}>
                     {/[0-9]/.test(password) ? <FiCheck className="w-3 h-3" /> : '•'}
                   </span>
                   <span className={/[0-9]/.test(password) ? 'text-green-600' : 'text-gray-600'}>
@@ -318,7 +381,7 @@ function ResetPasswordContent() {
               <div className="flex items-start space-x-3">
                 <FiShield className="w-5 h-5 text-blue-600 mt-0.5" />
                 <p className="text-sm text-blue-700">
-                  <span className="font-semibold">Secure connection:</span> All passwords are encrypted with AES-256 encryption.
+                  <span className="font-semibold">Security Note:</span> Your password is encrypted with industry-standard AES-256 encryption.
                 </p>
               </div>
             </div>
@@ -331,7 +394,7 @@ function ResetPasswordContent() {
             className="text-sm text-gray-600 hover:text-blue-600 font-medium transition-colors flex items-center justify-center mx-auto"
           >
             <FiArrowLeft className="w-4 h-4 mr-2" />
-            Back to Home
+            Back to Homepage
           </button>
         </div>
       </div>
@@ -348,9 +411,9 @@ export default function ResetPasswordPage() {
             <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
               <FiLoader className="w-8 h-8 text-blue-600 animate-spin" />
             </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Loading...</h1>
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">Loading Reset Page...</h1>
             <p className="text-gray-600">
-              Verifying your reset link, please wait.
+              Preparing your password reset form, please wait.
             </p>
           </div>
         </div>

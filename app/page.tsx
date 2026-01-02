@@ -160,7 +160,7 @@ export default function HomePage() {
             </div>
             
             {/* App Preview */}
-            <div className="relative">
+            <div className="relative animate-float">
   <div className="relative mx-auto w-80 h-[600px]">
     {/* Phone Frame with Metallic Edge */}
     <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 rounded-[3rem] p-[3px] shadow-2xl">
