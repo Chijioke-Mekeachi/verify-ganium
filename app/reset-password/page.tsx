@@ -259,7 +259,7 @@ console.log(token)
                 <input
                   {...register('password')}
                   type={showPassword ? 'text' : 'password'}
-                  className="w-full px-4 py-3 pl-11 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="w-full text-black px-4 py-3 pl-11 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   placeholder="Enter new password"
                   disabled={success || loading}
                 />
@@ -304,7 +304,7 @@ console.log(token)
                 <input
                   {...register('confirmPassword')}
                   type={showConfirmPassword ? 'text' : 'password'}
-                  className="w-full px-4 py-3 pl-11 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 pl-11 bg-gray-50 text-black border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   placeholder="Confirm new password"
                   disabled={success || loading}
                 />

@@ -42,10 +42,11 @@ export default function HomePage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center">
-                <FiShield className="w-6 h-6 text-white" />
+                {/* <FiShield className="w-6 h-6 text-white" /> */}
+                <Image src={'/logo.png'} width={50} height={50} alt='Ganium logo' className='rounded-[10px]'/>
               </div>
               <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
-                ScamGuard
+                Ganium
               </span>
             </div>
 
@@ -98,7 +99,7 @@ export default function HomePage() {
               </h1>
               
               <p className="text-xl text-gray-600 leading-relaxed">
-                ScamGuard uses advanced AI algorithms to detect fraudulent websites, 
+                Ganium uses advanced AI algorithms to detect fraudulent websites, 
                 phishing emails, and scam messages in real-time. Protect your digital life 
                 with the most intelligent security app.
               </p>
@@ -313,7 +314,7 @@ export default function HomePage() {
         <div className="container mx-auto">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              How ScamGuard Protects You
+              How Ganium Protects You
             </h2>
             <p className="text-xl text-gray-600">
               Simple setup, powerful protection
@@ -369,7 +370,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Download ScamGuard Today
+                Download Ganium Today
               </h2>
               <p className="text-xl text-gray-600 mb-8">
                 Available for iOS and Android. Start your 14-day free trial now.
@@ -504,7 +505,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-gray-700 text-lg mb-6">
-                  "ScamGuard saved me from a phishing scam that looked identical to my bank's website. The app detected it immediately and prevented me from entering my credentials."
+                  "Ganium saved me from a phishing scam that looked identical to my bank's website. The app detected it immediately and prevented me from entering my credentials."
                 </p>
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center font-bold text-blue-700">
@@ -608,7 +609,7 @@ export default function HomePage() {
                 <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center">
                   <FiShield className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-2xl font-bold">ScamGuard</span>
+                <span className="text-2xl font-bold">Ganium</span>
               </div>
               <p className="text-blue-300 text-sm">
                 Advanced AI-powered scam detection to protect your digital life.
@@ -647,7 +648,7 @@ export default function HomePage() {
           </div>
           
           <div className="border-t border-blue-800 mt-12 pt-8 text-center text-blue-400">
-            <p>&copy; {new Date().getFullYear()} ScamGuard AI. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} Ganium AI. All rights reserved.</p>
             <p className="text-sm mt-2">Protecting users in 150+ countries from online scams.</p>
           </div>
         </div>
