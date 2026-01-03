@@ -107,14 +107,14 @@ export default function HomePage() {
               <div className="space-y-4">
                 <div className="flex flex-col sm:flex-row gap-4">
                   <a
-                    href="https://apps.apple.com/app/scanguard"
+                    href="/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-blue-900 transition-all shadow-xl hover:shadow-2xl shadow-blue-300 hover:shadow-blue-400 flex items-center justify-center group"
                   >
                     <FaApple className="w-6 h-6 mr-3" />
                     <div className="text-left">
-                      <div className="text-xs">Download on the</div>
+                      <div className="text-xs">IOS is Unavaliable</div>
                       <div className="text-lg">App Store</div>
                     </div>
                   </a>
@@ -128,7 +128,7 @@ export default function HomePage() {
                     <FaGooglePlay className="w-5 h-5 mr-3" />
                     <div className="text-left">
                       <div className="text-xs">GET IT ON</div>
-                      <div className="text-lg">Google Play</div>
+                      <div className="text-lg">Expo</div>
                     </div>
                   </a>
                 </div>
@@ -326,7 +326,7 @@ export default function HomePage() {
               {
                 step: "01",
                 title: "Download & Setup",
-                description: "Install from App Store or Google Play in under 2 minutes",
+                description: "Install from App Store or Expo in under 2 minutes",
                 icon: <FiDownload className="w-8 h-8" />
               },
               {
@@ -373,7 +373,7 @@ export default function HomePage() {
                 Download Ganium Today
               </h2>
               <p className="text-xl text-gray-600 mb-8">
-                Available for iOS and Android. Start your 14-day free trial now.
+                Available for Android. Start your 14-day free trial now.
               </p>
               
               {/* Platform Info */}
@@ -455,14 +455,14 @@ export default function HomePage() {
               {/* Download Buttons */}
               <div className="space-y-4">
                 <a
-                  href="https://apps.apple.com/app/scanguard"
+                  href="/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center bg-gradient-to-r from-blue-600 to-blue-800 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-900 transition-all shadow-xl hover:shadow-2xl w-full md:w-auto justify-center"
                 >
                   <SiAppstore className="w-6 h-6 mr-3" />
                   <div className="text-left">
-                    <div className="text-xs">Download on the</div>
+                    <div className="text-xs">IOS version is Unavaliable</div>
                     <div className="text-lg">App Store</div>
                   </div>
                 </a>
@@ -476,7 +476,7 @@ export default function HomePage() {
                   <SiGoogleplay className="w-5 h-5 mr-3" />
                   <div className="text-left">
                     <div className="text-xs">GET IT ON</div>
-                    <div className="text-lg">Google Play</div>
+                    <div className="text-lg">Expo</div>
                   </div>
                 </a>
               </div>
@@ -575,13 +575,13 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://apps.apple.com/app/scanguard"
+                href=""
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-white text-blue-700 px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-50 transition-all shadow-xl hover:shadow-2xl flex items-center justify-center"
               >
                 <FaApple className="w-6 h-6 mr-3" />
-                Download for iOS
+                iOS is Unavaliable
               </a>
               <a
                 href="https://play.google.com/store/apps/details?id=com.scanguard"
