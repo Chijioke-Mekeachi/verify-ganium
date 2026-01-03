@@ -119,7 +119,7 @@ export default function HomePage() {
                   </a>
                   
                   <a
-                    href="https://play.google.com/store/apps/details?id=com.scanguard"
+                    href="https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/fb6f5539-6270-49de-bf41-796fa43deaba"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-white text-gray-900 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-50 transition-all shadow-xl hover:shadow-2xl border border-gray-200 flex items-center justify-center group"
@@ -467,7 +467,7 @@ export default function HomePage() {
                 </a>
                 
                 <a
-                  href="https://play.google.com/store/apps/details?id=com.scanguard"
+                  href="https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/fb6f5539-6270-49de-bf41-796fa43deaba"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all shadow-xl hover:shadow-2xl border border-gray-200 w-full md:w-auto justify-center"
