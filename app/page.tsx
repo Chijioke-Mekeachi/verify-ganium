@@ -584,7 +584,7 @@ export default function HomePage() {
                 iOS is Unavaliable
               </a>
               <a
-                href="https://play.google.com/store/apps/details?id=com.scanguard"
+                href="https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/71c78c2a-765a-48b1-9e17-4911f4d688f5"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-blue-900 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-950 transition-all shadow-xl hover:shadow-2xl border border-blue-700 flex items-center justify-center"
