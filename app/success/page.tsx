@@ -177,13 +177,6 @@ export default function SuccessPage() {
           </div>
         </div>
       </div>
-
-      <style jsx global>{`
-        @keyframes progress {
-          from { width: 0%; }
-          to { width: 100%; }
-        }
-      `}</style>
     </div>
   );
 }

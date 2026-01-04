@@ -82,3 +82,7 @@ body {
 .rotate-x-3 {
   transform: rotateX(3deg);
 }
+@keyframes progress {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
