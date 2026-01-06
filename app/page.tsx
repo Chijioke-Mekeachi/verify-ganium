@@ -120,7 +120,7 @@ export default function HomePage() {
                   </a>
                   
                   <a
-                    href="https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/a36c4005-3f7d-4ca7-b4ee-085bd2c44520"
+                    href="https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/661d4051-c58b-4576-96e0-e593e8abed17"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-white text-gray-900 px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-50 transition-all shadow-xl hover:shadow-2xl border border-gray-200 flex items-center justify-center group"
@@ -468,7 +468,7 @@ export default function HomePage() {
                 </a>
                 
                 <a
-                  href="https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/a36c4005-3f7d-4ca7-b4ee-085bd2c44520"
+                  href="https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/661d4051-c58b-4576-96e0-e593e8abed17"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center bg-white text-gray-900 px-8 py-4 rounded-xl font-semibold hover:bg-gray-50 transition-all shadow-xl hover:shadow-2xl border border-gray-200 w-full md:w-auto justify-center"
@@ -584,7 +584,7 @@ export default function HomePage() {
                 iOS is Unavaliable
               </a>
               <a
-                href="https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/a36c4005-3f7d-4ca7-b4ee-085bd2c44520"
+                href="https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/661d4051-c58b-4576-96e0-e593e8abed17"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-blue-900 text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-blue-950 transition-all shadow-xl hover:shadow-2xl border border-blue-700 flex items-center justify-center"
