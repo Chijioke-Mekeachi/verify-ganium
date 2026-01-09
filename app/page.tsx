@@ -20,13 +20,13 @@ import { motion } from 'framer-motion';
 // Centralized Download Links Configuration
 const DOWNLOAD_LINKS = {
   android: {
-    expo: 'https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/661d4051-c58b-4576-96e0-e593e8abed17',
-    googlePlay: 'https://play.google.com/store/apps/details?id=com.ganium.app',
+    expo: 'https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/c0d12c04-b15f-427b-9187-6b2e34d8c5a4',
+    googlePlay: '',
   },
   ios: {
-    appStore: 'https://apps.apple.com/app/ganium-scam-protection/id1234567890',
+    appStore: '',
   },
-  qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/661d4051-c58b-4576-96e0-e593e8abed17'
+  qrCode: 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://expo.dev/accounts/chijioke2007/projects/ganiumai/builds/c0d12c04-b15f-427b-9187-6b2e34d8c5a4'
 } as const;
 
 export default function HomePage() {
