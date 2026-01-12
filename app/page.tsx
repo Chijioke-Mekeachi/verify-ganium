@@ -16,6 +16,8 @@ import { FaApple, FaGooglePlay, FaBitcoin } from 'react-icons/fa';
 import { SiAppstore, SiGoogleplay } from 'react-icons/si';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import 'devices.css/dist/devices.min.css';
+
 
 // Centralized Download Links Configuration
 const DOWNLOAD_LINKS = {
@@ -368,15 +370,21 @@ export default function HomePage() {
                       {/* Screenshot Container */}
                       <div className="relative aspect-[9/16] bg-gradient-to-br from-gray-800 to-gray-900">
                         {/* Actual Screenshot */}
-                      <div className="relative w-full max-w-sm aspect-[9/16] mx-auto">
-  <Image
-    src={feature.screenshot}
-    alt={`${feature.title} Screenshot`}
-    fill
-    className="object-contain rounded-xl"
-    sizes="(max-width: 768px) 80vw, 320px"
-  />
+                      <div className="flex justify-center">
+  <div className="marvel-device iphone-x">
+    <div className="notch"></div>
+    <div className="screen">
+      <Image
+        src={feature.screenshot}
+        alt={`${feature.title} Screenshot`}
+        width={375}
+        height={812}
+        className="w-full h-full object-cover"
+      />
+    </div>
+  </div>
 </div>
+
 
                         
                         {/* Screenshot Overlay */}

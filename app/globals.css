@@ -86,3 +86,9 @@ body {
           from { width: 0%; }
           to { width: 100%; }
         }
+.marvel-device {
+  opacity: 1 !important;
+  display: block !important;
+  visibility: visible !important;
+  position: relative;
+}
